@@ -64,45 +64,41 @@ void concat(Node *p, Node *q)
     p->next = second;
 }
 
-void merge(Node *p, Node *q)
+void Merge(struct Node *p,struct Node *q)
 {
-    Node *last = NULL;
-    if (p->data < q->data)
+    struct Node *last;
+    if(p->data < q->data)
     {
-        third = last = p;
-        p = p->next;
-        last->next = NULL;
-
+    third=last=p;
+    p=p->next;
+    third->next=NULL;
     }
     else
     {
-        third = last = q;
-        q = q->next;
-        last->next = NULL;
-
+    third=last=q;
+    q=q->next;
+    third->next=NULL;
     }
-    while(first != NULL && second != NULL)
+    while(p && q)
     {
-        if (first->data < second->data)
+        if(p->data < q->data)
         {
-            last->next = first;
-            last = first;
-            first = first->next;
-            last->next = NULL;
+        last->next=p;
+        last=p;
+        p=p->next;
+        last->next=NULL;
         }
         else
         {
-            last->next = second;
-            last = second;
-            second = second->next;
-            last->next = NULL;
-
+        last->next=q;
+        last=q;
+        q=q->next;
+        last->next=NULL;
         }
-        if (first != NULL)
-            last->next = first;
-        else 
-            last->next = second;
     }
+    if(p)last->next=p;
+    if(q)last->next=q;
+
 }
 int main()
 {
@@ -111,16 +107,16 @@ int main()
     int B[] = {2, 4, 7};
     int m = sizeof(B) / sizeof(B[0]);
     create(A, n);
-    Display(first);
+    // Display(first);
     create2(B, m);
     cout << endl;
-    Display(second);
+    // Display(second);
     cout << endl;
-    concat(first, second);
-    Display(third);
+    // concat(first, second);
+    // Display(third);
 
     cout << endl << endl;
-    merge(first, second);
+    Merge(first, second);
 
     Display(third);
 }    
